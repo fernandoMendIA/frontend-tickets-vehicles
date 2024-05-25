@@ -1,0 +1,142 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Formulario de vehiculos</strong>
+      </c-card-header>
+      <c-card-body>
+          <form cForm>
+            <c-row>
+              <c-col>
+                <div class="mb-3">
+                  <label cLabel for="ouner">Nombre del propietario</label>
+                  <input cFormControl
+                         id="ouner"
+                         placeholder ="Nombre Propietario"
+                         [(ngModel)] = "vehicleModelo.ouner"
+                         type="text"
+                         name="ouner"
+                  />
+                </div>
+
+              </c-col>
+              <c-col>
+                
+                <div class="mb-3">
+                  <label cLabel for="color">Color</label>
+                  <input cFormControl
+                         id="color"
+                         placeholder="Color del vehiculo"
+                         type="text"
+                         name="color"
+                         [(ngModel)] = "vehicleModelo.color"
+                  />
+                </div>
+              </c-col>
+            </c-row>
+            <!-- ////////////// -->
+            <c-row>
+              <c-col>
+
+                <div class="mb-3">
+                  <label cLabel for="type">Tipo</label>
+                  <input cFormControl
+                         id="type"
+                         placeholder="Tipo de vehiculo"
+                         type="text"
+                         name="type"
+                         [(ngModel)] = "vehicleModelo.type_vehicle"
+                  />
+                </div>
+              </c-col>
+
+              <c-col>
+                <div class="mb-3">
+                  <label cLabel for="anio">Anio</label>
+                  <input cFormControl
+                         id="anio"
+                         placeholder="2005"
+                         type="text"
+                         name="anio"
+                         [(ngModel)] = "vehicleModelo.year"
+                  />
+                </div>
+              </c-col>
+
+            </c-row>
+
+            
+
+            <!-- ////////// -->
+            <div class="mb-3">
+              <label cLabel for="plate">Placa</label>
+              <input cFormControl
+                     id="plate"
+                     placeholder="Ingrese placa del automovil"
+                     type="text"
+                     name="plate"
+                     [(ngModel)] = "vehicleModelo.plate"
+
+              />
+            </div>
+            <div class="mb-3">
+              <label cLabel for="ruat">Ingrese el RUAT</label>
+              <input cFormControl
+                     id="ruat"
+                     type="text"
+                     name="ruat"
+                     [(ngModel)] = "vehicleModelo.ruat"
+              />
+              <!-- <select  aria-label="Seleccione usuario" cSelect >
+                <option></option>
+                <option value="664407b69616a061c8547132">xiac</option>
+                <option value="2">Esteban</option>
+                <option value="3">Esther</option>
+              </select> -->
+            </div>
+            <button (click)="guardarVehicle()" cButton class="me-1" color="primary" type="submit">
+              Guardar
+            </button>
+          </form>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12">
+    <table [striped]="true" cTable>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Propietario</th>
+          <th scope="col">Placa</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">color</th>
+          <th scope="col">Anio</th>
+
+
+          <th scope="col" style="text-align: center;">Acciones</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        @for ( vehicle of listaVehicles; track vehicle; let index = $index ){
+          <tr>
+            <th scope="row">{{index +1}}</th>
+            <td>{{vehicle.ouner}}</td>
+            <td>{{vehicle.plate}}</td>
+            <td>{{vehicle.type_vehicle}}</td>
+            <td>{{vehicle.color}}</td>
+            <td>
+              {{vehicle.year }}
+             </td>
+            <td style="text-align: right;">
+              <button cButton color="warning" variant="outline" (click)="verVehicle(vehicle)" >Editar</button>
+              <button (click)="eliminarVehicle(vehicle)" cButton color="danger" variant="outline">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+  </c-col>
+  
+</c-row>

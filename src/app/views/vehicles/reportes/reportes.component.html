@@ -1,0 +1,128 @@
+
+
+
+<c-row>
+  
+  <c-col xs="12">
+    <c-card class="mb-3">
+      <c-card-header ngPreserveWhitespaces>
+        <strong>Reportes</strong>
+      </c-card-header>
+      <c-card-body>
+        <c-nav variant="pills">
+          <c-nav-item>
+            <a [cTabContent]="tabContent3" [tabPaneIdx]="0" cNavLink>
+              <svg cIcon class="me-2" name="cilHome"></svg>
+              Multas
+            </a>
+          </c-nav-item>
+          <c-nav-item>
+            <a [cTabContent]="tabContent3" [tabPaneIdx]="1" cNavLink>
+              <svg cIcon class="me-2" name="cilUser"></svg>
+              Vehiculos
+            </a>
+          </c-nav-item>
+
+        </c-nav>
+        <c-tab-content #tabContent3="cTabContent" cRounded="bottom" [activeTabPaneIdx]="0">
+          <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
+          <!-- inicio pestana 1 -->
+          <c-row ngPreserveWhitespaces>
+            
+            <c-col xs="12">
+              <table [striped]="true" cTable>
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Propietario</th>
+                    <th scope="col">placa</th>
+                    <th scope="col">velocidad</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Fecha</th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                  @for ( reticket of listaVehicles_multas; track reticket.ticket._id; let index = $index ){
+                    <tr>
+                      <th scope="row">{{index +1}}</th>
+                      <td>{{reticket.vehicle.ouner}}</td>
+                      <td>{{reticket.ticket.plate}}</td>
+                      <td>{{reticket.ticket.speed}}</td>
+                      <td>
+                       {{reticket.vehicle.type_vehicle}}
+                      </td>
+                      <td>
+                        {{reticket.ticket.date | date: 'dd/MM/yyyy' }}
+                       </td>
+                    </tr>       
+                  }
+                </tbody>
+              </table>
+          
+            </c-col>
+          </c-row>
+          </c-tab-pane>
+          <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
+          <!-- inicio pestana 2 -->
+            
+          <c-col xs="12">
+            <c-card class="mb-4">
+              <c-card-header>
+                <strong>Multas por vehiculo</strong>
+              </c-card-header>
+              <c-card-body>
+                  <form cForm>
+                    <div class="mb-3">
+                      <label cLabel for="ouner">Id del vehiculo</label>
+                      <input cFormControl
+                             id="idVehicle"
+                             placeholder ="id del vehiculo"
+                             [(ngModel)] = "repVehicleModel.idVehiculo"
+        
+                             type="text"
+                             name="idVehicle"
+                      />
+                    </div>
+                    
+                    <button (click)="reporVehicleTicketId()"cButton class="me-1" color="primary" type="submit">
+                      Buscar
+                    </button>
+                  </form>
+              </c-card-body>
+            </c-card>
+          </c-col>
+
+          <c-col xs="12">
+            <table [striped]="true" cTable>
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Propietario</th>
+                  <th scope="col">placa</th>
+
+                </tr>
+              </thead>
+              
+              <tbody>
+                @for ( vehicleTicket of listaVehicles_byId; track vehicleTicket._id; let index = $index ){
+                  <tr>
+                    <th scope="row">{{index +1}}</th>
+                    <td>{{vehicleTicket.ouner}}</td>
+                    <td>{{vehicleTicket.vehicle_ruat.plate}}</td>
+
+                  </tr>       
+                }
+              </tbody>
+            </table>
+        
+          </c-col>
+
+
+
+          </c-tab-pane>
+        </c-tab-content>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
